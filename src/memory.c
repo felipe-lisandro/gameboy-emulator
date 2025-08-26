@@ -1,6 +1,7 @@
 #include "memory.h"
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 uint8_t memory[0x10000];
 /*
@@ -18,6 +19,21 @@ uint8_t *rom = NULL;
 uint32_t size = 0;
 
 int actual_bank;
+
+void load_rom_in_memory(void){
+    for(uint32_t i = 0; i <= 0x3FFF && i < size; i++){
+        memory[i] = rom[i];
+    }
+    for(uint32_t i = 0; i <= 0x7FFF; i++){
+        if(0x4000 + i < size){
+            memory[0x4000 + i] = rom[0x4000 + i];
+        }
+        else{
+            memory[0x4000 + i] = 0xFF;
+        }
+    }
+    actual_bank = 1;
+}
 
 void load_rom(const char *fileName){
     FILE *f = fopen(fileName, "rb");
@@ -39,28 +55,13 @@ void load_rom(const char *fileName){
     load_rom_in_memory();
 }
 
-void load_rom_in_memory(void){
-    for(int i = 0; i <= 0x3FFF && i < size; i++){
-        memory[i] = rom[i];
-    }
-    for(int i = 0; i <= 0x7FFF; i++){
-        if(0x4000 + i < size){
-            memory[0x4000 + i] = rom[0x4000 + i];
-        }
-        else{
-            memory[0x4000 + i] = 0xFF;
-        }
-    }
-    actual_bank = 1;
-}
-
 void switch_mem_bank(uint8_t bank){
-    if(bank = 0) bank = 1;
+    if(bank == 0) bank = 1;
     if(bank * 0x4000 >= size) return;
     actual_bank = bank;
     //remap the bank to what I want
     uint32_t offset = 0x4000 * bank; // each bank is 16kb, so you jump 16kb * the bank number
-    for(int i = 0; i <= 0x3FFF; i++){
+    for(uint32_t i = 0; i <= 0x3FFF; i++){
         if(offset + i < size){
             memory[0x4000 + i] = rom[offset + i];
         }
