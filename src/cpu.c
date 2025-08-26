@@ -14,6 +14,7 @@ void cpu_init(void){
 
 void cpu_cycle(void){
     uint8_t opcode = mem_read(cpu.PC++);
-    InstructionTable[opcode].execute(&cpu);
+    Instruction instr = InstructionTable[opcode];
+    instr.execute(&cpu, instr.args);
     cpu.cycles += InstructionTable[opcode].cycles;
 }

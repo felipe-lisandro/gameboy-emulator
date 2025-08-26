@@ -1,70 +1,40 @@
 #include "instructions.h"
 #include "helper.h"
 
-#define X(op, name, cycles, func) [op] = { name, cycles, func },
+#define X(op, name, cycles, func, args)[op] = {name, cycles, func, args},
 Instruction instruction_table[256] = {
     #include "instructions.def"
 };
 #undef X
 
 void instr_NOP(CPU *cpu){
-    
+
 }
 
-// inc's and dec's for each 8=bit register
-
-void instr_INC_A(CPU *cpu){
-    inc8(cpu->A);
+void instr_INC_8(CPU *cpu, void *args){
+    uint8_t *reg = (uint8_t *) args;
+    uint8_t old = *reg;
+    (*reg)++;
+    // zero flag
+    if (*reg == 0) SET_FLAG(cpu, FLAG_Z);
+    else CLEAR_FLAG(cpu, FLAG_Z);
+    // clear subtract
+    CLEAR_FLAG(cpu, FLAG_N);
+    // if there's half carry, store
+    if ((old & 0x0F) + 1 > 0x0F) SET_FLAG(cpu, FLAG_H);
+    else CLEAR_FLAG(cpu, FLAG_H);
 }
 
-void instr_DEC_A(CPU *cpu){
-    dec8(cpu->A);
-}
-
-void instr_INC_B(CPU *cpu){
-    inc8(cpu->B);
-}
-
-void instr_DEC_B(CPU *cpu){
-    dec8(cpu->B);
-}
-
-void instr_INC_C(CPU *cpu){
-    inc8(cpu->C);
-}
-
-void instr_DEC_C(CPU *cpu){
-    dec8(cpu->C);
-}
-
-void instr_INC_D(CPU *cpu){
-    inc8(cpu->D);
-}
-
-void instr_DEC_D(CPU *cpu){
-    dec8(cpu->D);
-}
-
-void instr_INC_E(CPU *cpu){
-    inc8(cpu->E);
-}
-
-void instr_DEC_E(CPU *cpu){
-    dec8(cpu->E);
-}
-
-void instr_INC_H(CPU *cpu){
-    inc8(cpu->H);
-}
-
-void instr_DEC_H(CPU *cpu){
-    dec8(cpu->H);
-}
-
-void instr_INC_L(CPU *cpu){
-    inc8(cpu->L);
-}
-
-void instr_DEC_L(CPU *cpu){
-    dec8(cpu->L);
+void instr_DEC_8(CPU *cpu, void *args){
+    uint8_t *reg = (uint8_t *) args;
+    uint8_t old = *reg;
+    (*reg)--;
+    // zero flag
+    if (*reg == 0) SET_FLAG(cpu, FLAG_Z);
+    else CLEAR_FLAG(cpu, FLAG_Z);
+    // set subtract
+    SET_FLAG(cpu, FLAG_N);
+    // if there's half carry, store
+    if ((old & 0x0F) + 1 > 0x0F) SET_FLAG(cpu, FLAG_H);
+    else CLEAR_FLAG(cpu, FLAG_H);
 }
