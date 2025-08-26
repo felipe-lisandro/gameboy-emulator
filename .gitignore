@@ -1,0 +1,19 @@
+# Compiled object files
+*.o
+
+# Compiled binaries
+a.out
+*.exe
+*.out
+
+# Backup files
+*~
+
+# Debug files
+*.log
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+TODO
