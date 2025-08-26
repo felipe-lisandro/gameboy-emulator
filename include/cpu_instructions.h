@@ -1,0 +1,40 @@
+// cpu_instructions.h
+#ifndef CPU_INSTRUCTIONS_H
+#define CPU_INSTRUCTIONS_H
+
+#include "cpu.h"
+
+// All instruction function prototypes
+void instr_NOP(CPU *cpu, int args);
+void instr_LD_BC_d16(CPU *cpu, int args);
+void instr_LD_BC_A(CPU *cpu, int args);
+void instr_INC_BC(CPU *cpu, int args);
+void instr_INC_8(CPU *cpu, int args);
+void instr_DEC_8(CPU *cpu, int args);
+void instr_LD_8_U8(CPU *cpu, int args);
+void instr_RLCA(CPU *cpu, int args);
+void instr_LD_a16_SP(CPU *cpu, int args);
+void instr_ADD_HL_BC(CPU *cpu, int args);
+void instr_LD_A_BC(CPU *cpu, int args);
+void instr_DEC_BC(CPU *cpu, int args);
+void instr_RRCA(CPU *cpu, int args);
+void instr_LD_DE_d16(CPU *cpu, int args);
+void instr_LD_DE_A(CPU *cpu, int args);
+void instr_INC_DE(CPU *cpu, int args);
+void instr_RLA(CPU *cpu, int args);
+void instr_JR_r8(CPU *cpu, int args);
+void instr_ADD_HL_DE(CPU *cpu, int args);
+void instr_LD_A_DE(CPU *cpu, int args);
+void instr_DEC_DE(CPU *cpu, int args);
+void instr_JR_NZ_r8(CPU *cpu, int args);
+void instr_LD_HL_d16(CPU *cpu, int args);
+void instr_LD_HLp_A(CPU *cpu, int args);
+void instr_INC_HL(CPU *cpu, int args);
+void instr_DAA(CPU *cpu, int args);
+void instr_JR_Z_r8(CPU *cpu, int args);
+void instr_ADD_HL_HL(CPU *cpu, int args);
+void instr_LD_A_HLp(CPU *cpu, int args);
+void instr_DEC_HL(CPU *cpu, int args);
+void instr_CPL(CPU *cpu, int args);
+
+#endif // CPU_INSTRUCTIONS_H
