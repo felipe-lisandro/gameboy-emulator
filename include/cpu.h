@@ -21,6 +21,8 @@ typedef struct CPU{
     int cycles;
 } CPU;
 
+extern CPU cpu; // declare it for other files
+
 void cpu_init(void);
 
 void cpu_cycle(void);

@@ -1,6 +1,9 @@
 #include "cpu.h"
 #include "memory.h"
 #include "instructions.h"
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 CPU cpu;
 
@@ -15,6 +18,7 @@ void cpu_init(void){
 void cpu_cycle(void){
     uint8_t opcode = mem_read(cpu.PC++);
     Instruction instr = InstructionTable[opcode];
+    printf("Opcode = %02X, args = %d\n", opcode, instr.args);
     instr.execute(&cpu, instr.args);
     cpu.cycles += InstructionTable[opcode].cycles;
 }
