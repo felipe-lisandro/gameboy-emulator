@@ -25,8 +25,5 @@ void instr_LD_HL_d16(CPU *cpu, int args) { return; }
 void instr_LD_HLp_A(CPU *cpu, int args) { return; }
 void instr_INC_HL(CPU *cpu, int args) { return; }
 void instr_DAA(CPU *cpu, int args) { return; }
-void instr_JR_Z_r8(CPU *cpu, int args) { return; }
 void instr_ADD_HL_HL(CPU *cpu, int args) { return; }
 void instr_LD_A_HLp(CPU *cpu, int args) { return; }
-void instr_DEC_HL(CPU *cpu, int args) { return; }
-void instr_CPL(CPU *cpu, int args) { return; }
