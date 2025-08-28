@@ -2,7 +2,7 @@
 #include "cpu.h"
 #include "memory.h"
 
-// Missing instruction stubs
+// missing instruction stubs for testing
 void instr_LD_BC_d16(CPU *cpu, int args) { return; }
 void instr_LD_BC_A(CPU *cpu, int args) { return; }
 void instr_INC_BC(CPU *cpu, int args) { return; }

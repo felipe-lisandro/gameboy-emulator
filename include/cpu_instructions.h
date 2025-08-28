@@ -1,10 +1,9 @@
-// cpu_instructions.h
 #ifndef CPU_INSTRUCTIONS_H
 #define CPU_INSTRUCTIONS_H
 
 #include "cpu.h"
 
-// All instruction function prototypes
+// all instruction function prototypes
 void instr_NOP(CPU *cpu, int args);
 void instr_LD_BC_d16(CPU *cpu, int args);
 void instr_LD_BC_A(CPU *cpu, int args);
@@ -37,4 +36,4 @@ void instr_LD_A_HLp(CPU *cpu, int args);
 void instr_DEC_HL(CPU *cpu, int args);
 void instr_CPL(CPU *cpu, int args);
 
-#endif // CPU_INSTRUCTIONS_H
+#endif 
