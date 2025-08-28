@@ -21,16 +21,10 @@ uint32_t size = 0;
 int actual_bank;
 
 void load_rom_in_memory(void){
-    for(uint32_t i = 0; i <= 0x3FFF && i < size; i++){
-        memory[i] = rom[i];
-    }
+    for(uint32_t i = 0; i <= 0x3FFF && i < size; i++) memory[i] = rom[i];
     for(uint32_t i = 0; i <= 0x7FFF; i++){
-        if(0x4000 + i < size){
-            memory[0x4000 + i] = rom[0x4000 + i];
-        }
-        else{
-            memory[0x4000 + i] = 0xFF;
-        }
+        if(0x4000 + i < size) memory[0x4000 + i] = rom[0x4000 + i];
+        else memory[0x4000 + i] = 0xFF;
     }
     actual_bank = 1;
 }
@@ -62,12 +56,8 @@ void switch_mem_bank(uint8_t bank){
     //remap the bank to what I want
     uint32_t offset = 0x4000 * bank; // each bank is 16kb, so you jump 16kb * the bank number
     for(uint32_t i = 0; i <= 0x3FFF; i++){
-        if(offset + i < size){
-            memory[0x4000 + i] = rom[offset + i];
-        }
-        else{
-            memory[0x4000 + i] = 0xFF;
-        }
+        if(offset + i < size) memory[0x4000 + i] = rom[offset + i];
+        else memory[0x4000 + i] = 0xFF;
     }
 }
 
@@ -76,11 +66,10 @@ uint8_t mem_read(uint16_t addr){
 }
 
 void mem_write(uint16_t addr, uint8_t data){
+    // later on there will be other special addresses that represent other special write
     if(addr >= 0x2000 && addr <= 0x3FFF){
         // bank switching
         switch_mem_bank(data & 0x7F); // when we want to switch banks, data is the bank we want to go to
     }
-    else{
-        memory[addr] = data;
-    }
+    else memory[addr] = data;
 }

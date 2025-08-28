@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-extern uint8_t memory[0x10000]; // declare it for other files
+extern uint8_t memory[0x10000];
 
 void load_rom(const char *fileName);
 
