@@ -21,10 +21,37 @@ typedef struct CPU{
     int cycles;
 } CPU;
 
-extern CPU cpu; // declare it for other files
+extern CPU cpu;
 
 void cpu_init(void);
 
 void cpu_cycle(void);
+
+// 16-bit register helpers
+static inline uint16_t get_HL(CPU *cpu){
+    uint16_t reg = REG16_GET(cpu->H, cpu->L);
+    return reg;
+}
+static inline void set_HL(CPU *cpu, uint16_t value){
+    REG16_SET(cpu->H, cpu->L, value);
+}
+static inline uint16_t get_BC(CPU *cpu){
+    uint16_t reg = REG16_GET(cpu->B, cpu->C);
+    return reg;
+}
+static inline void set_BC(CPU *cpu, uint16_t value){
+    REG16_SET(cpu->B, cpu->C, value);
+}
+static inline uint16_t get_DE(CPU *cpu){
+    uint16_t reg = REG16_GET(cpu->D, cpu->E);
+    return reg;
+}
+static inline void set_DE(CPU *cpu, uint16_t value){
+    REG16_SET(cpu->D, cpu->E, value);
+}
+
+static inline uint16_t GET_SP(CPU *cpu){
+    return cpu->SP;
+}
 
 #endif
