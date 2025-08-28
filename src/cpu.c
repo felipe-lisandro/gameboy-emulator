@@ -7,6 +7,14 @@
 
 CPU cpu;
 
+#define REG16_GET(hi, lo)   (((uint16_t)(hi) << 8) | (lo))
+#define REG16_SET(hi, lo, val) \
+    do { \
+        (hi) = ((val) >> 8) & 0xFF; \
+        (lo) = (val) & 0xFF; \
+    } while (0)
+
+
 void cpu_init(void){
     memset(&cpu, 0, sizeof(CPU));
     cpu.cycles = 0;
