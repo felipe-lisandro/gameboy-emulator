@@ -5,35 +5,85 @@
 
 // all instruction function prototypes
 void instr_NOP(CPU *cpu, int args);
-void instr_LD_BC_d16(CPU *cpu, int args);
-void instr_LD_BC_A(CPU *cpu, int args);
-void instr_INC_BC(CPU *cpu, int args);
+
 void instr_INC_8(CPU *cpu, int args);
-void instr_DEC_8(CPU *cpu, int args);
-void instr_LD_8_U8(CPU *cpu, int args);
-void instr_RLCA(CPU *cpu, int args);
-void instr_LD_a16_SP(CPU *cpu, int args);
-void instr_ADD_HL_BC(CPU *cpu, int args);
-void instr_LD_A_BC(CPU *cpu, int args);
-void instr_DEC_BC(CPU *cpu, int args);
-void instr_RRCA(CPU *cpu, int args);
-void instr_LD_DE_d16(CPU *cpu, int args);
-void instr_LD_DE_A(CPU *cpu, int args);
-void instr_INC_DE(CPU *cpu, int args);
-void instr_RLA(CPU *cpu, int args);
-void instr_JR_r8(CPU *cpu, int args);
-void instr_ADD_HL_DE(CPU *cpu, int args);
-void instr_LD_A_DE(CPU *cpu, int args);
-void instr_DEC_DE(CPU *cpu, int args);
-void instr_JR_NZ_r8(CPU *cpu, int args);
-void instr_LD_HL_d16(CPU *cpu, int args);
-void instr_LD_HLp_A(CPU *cpu, int args);
+void instr_INC_16(CPU *cpu, int args);
 void instr_INC_HL(CPU *cpu, int args);
-void instr_DAA(CPU *cpu, int args);
-void instr_JR_Z_r8(CPU *cpu, int args);
-void instr_ADD_HL_HL(CPU *cpu, int args);
-void instr_LD_A_HLp(CPU *cpu, int args);
+
+void instr_DEC_8(CPU *cpu, int args);
+void instr_DEC_16(CPU *cpu, int args);
 void instr_DEC_HL(CPU *cpu, int args);
+
+void instr_ADD_A_8(CPU *cpu, int args);
+void instr_ADD_A_HL(CPU *cpu, int args);
+void instr_ADD_A_D8(CPU *cpu, int args);
+void instr_ADD_HL_16(CPU *cpu, int args);
+
+void instr_ADC_A_8(CPU *cpu, int args);
+void instr_ADC_A_HL(CPU *cpu, int args);
+void instr_ADC_A_D8(CPU *cpu, int args);
+
+void instr_SUB_A_8(CPU *cpu, int args);
+void instr_SUB_HL(CPU *cpu, int args);
+void instr_SUB_D8(CPU *cpu, int args);
+
+void instr_SBC_A_8(CPU *cpu, int args);
+void instr_SBC_HL(CPU *cpu, int args);
+void instr_SBC_A_D8(CPU *cpu, int args);
+
+void instr_AND_8(CPU *cpu, int args);
+void instr_AND_HL(CPU *cpu, int args);
+void instr_AND_D8(CPU *cpu, int args);
+
+void instr_OR_8(CPU *cpu, int args);
+void instr_OR_HL(CPU *cpu, int args);
+void instr_OR_D8(CPU *cpu, int args);
+
+void instr_XOR_8(CPU *cpu, int args);
+void instr_XOR_HL(CPU *cpu, int args);
+void instr_XOR_D8(CPU *cpu, int args);
+
+void instr_CP_8(CPU *cpu, int args);
+void instr_CP_HL(CPU *cpu, int args);
+void instr_CP_D8(CPU *cpu, int args);
+
+void instr_LD_8_U8(CPU *cpu, int args);
+void instr_LD_16_U16(CPU *cpu, int args);
+
+void instr_LD_A_8(CPU *cpu, int args);
+void instr_LD_B_8(CPU *cpu, int args);
+void instr_LD_C_8(CPU *cpu, int args);
+void instr_LD_D_8(CPU *cpu, int args);
+void instr_LD_E_8(CPU *cpu, int args);
+void instr_LD_H_8(CPU *cpu, int args);
+void instr_LD_L_8(CPU *cpu, int args);
+
+void instr_LD_8_HL(CPU *cpu, int args);
+void instr_LD_HL_8(CPU *cpu, int args);
+
+void instr_PUSH_16(CPU *cpu, int args);
+void instr_POP_16(CPU *cpu, int args);
+
+void instr_JR_s8(CPU *cpu, int args);
+void instr_JR_NZ_s8(CPU *cpu, int args);
+void instr_JR_Z_s8(CPU *cpu, int args);
+void instr_JR_NC_s8(CPU *cpu, int args);
+void instr_JR_C_s8(CPU *cpu, int args);
+
 void instr_CPL(CPU *cpu, int args);
+void instr_SCF(CPU *cpu, int args);
+void instr_CCF(CPU *cpu, int args);
+
+void instr_RST_N(CPU *cpu, int args);
+
+void instr_RET(CPU *cpu, int args);
+void instr_RET_IF(CPU *cpu, int args);
+
+void instr_JP_A16(CPU *cpu, int args);
+void instr_JP_IF_A16(CPU *cpu, int args);
+void instr_JP_HL(CPU *cpu, int args);
+
+void instr_CALL_A16(CPU *cpu, int args);
+void instr_CALL_IF_A16(CPU *cpu, int args);
 
 #endif 
