@@ -28,6 +28,14 @@ void cpu_init(void);
 void cpu_cycle(void);
 
 // 16-bit register helpers
+
+#define REG16_GET(hi, lo)  (((uint16_t)(hi) << 8) | (lo))
+#define REG16_SET(hi, lo, val) \
+    do { \
+        (hi) = ((val) >> 8) & 0xFF; \
+        (lo) = (val) & 0xFF; \
+    } while (0)
+
 static inline uint16_t get_HL(CPU *cpu){
     uint16_t reg = REG16_GET(cpu->H, cpu->L);
     return reg;
@@ -49,9 +57,29 @@ static inline uint16_t get_DE(CPU *cpu){
 static inline void set_DE(CPU *cpu, uint16_t value){
     REG16_SET(cpu->D, cpu->E, value);
 }
+static inline uint16_t get_AF(CPU *cpu){
+    uint16_t reg = REG16_GET(cpu->A, cpu->F);
+    return reg;
+}
+static inline void set_AF(CPU *cpu, uint16_t value){
+    cpu->A = ((value) >> 8) & 0xFF; 
+    cpu->F = value & 0xF0; 
+}
 
-static inline uint16_t GET_SP(CPU *cpu){
+static inline uint16_t get_SP(CPU *cpu){
     return cpu->SP;
+}
+
+static inline void set_SP(CPU *cpu, uint16_t value){
+    cpu->SP = value;
+}
+
+static inline uint16_t get_PC(CPU *cpu){
+    return cpu->PC;
+}
+
+static inline void set_PC(CPU *cpu, uint16_t value){
+    cpu->PC = value;
 }
 
 #endif

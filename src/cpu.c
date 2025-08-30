@@ -7,14 +7,6 @@
 
 CPU cpu;
 
-#define REG16_GET(hi, lo)   (((uint16_t)(hi) << 8) | (lo))
-#define REG16_SET(hi, lo, val) \
-    do { \
-        (hi) = ((val) >> 8) & 0xFF; \
-        (lo) = (val) & 0xFF; \
-    } while (0)
-
-
 void cpu_init(void){
     memset(&cpu, 0, sizeof(CPU));
     cpu.cycles = 0;
@@ -26,7 +18,7 @@ void cpu_init(void){
 void cpu_cycle(void){
     uint8_t opcode = mem_read(cpu.PC++);
     Instruction instr = InstructionTable[opcode];
-    printf("Opcode = %02X, args = %d\n", opcode, instr.args);
+    // printf("Opcode = %02X, args = %d\n", opcode, instr.args);
     instr.execute(&cpu, instr.args);
     cpu.cycles += InstructionTable[opcode].cycles;
 }
