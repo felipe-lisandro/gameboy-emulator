@@ -19,6 +19,8 @@ typedef struct CPU{
     uint8_t A, B, C, D, E, H, L, F; // 8-bit registers
     uint16_t PC, SP; // 16-bit registers
     int cycles;
+    int IME;
+    int setImeNext;
 } CPU;
 
 extern CPU cpu;
