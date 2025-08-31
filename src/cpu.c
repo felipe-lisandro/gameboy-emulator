@@ -17,8 +17,22 @@ void cpu_init(void){
 
 void cpu_cycle(void){
     uint8_t opcode = mem_read(cpu.PC++);
-    Instruction instr = InstructionTable[opcode];
-    // printf("Opcode = %02X, args = %d\n", opcode, instr.args);
-    instr.execute(&cpu, instr.args);
-    cpu.cycles += InstructionTable[opcode].cycles;
+    if(opcode != 0xCB){
+        Instruction instr = InstructionTable[opcode];
+        printf("Opcode = %02X, args = %d\n", opcode, instr.args);
+        instr.execute(&cpu, instr.args);
+        // printf("A: %02X B: %02X C: %02X D: %02X E: %02X H: %02X L: %02X\nZ: %02X C: %02X N: %02X H: %02X\n", cpu.A, cpu.B, cpu.C, cpu.D, cpu.E, cpu.H, cpu.L, GET_FLAG(&cpu, FLAG_Z), GET_FLAG(&cpu, FLAG_C), GET_FLAG(&cpu, FLAG_N), GET_FLAG(&cpu, FLAG_H));
+        cpu.cycles += InstructionTable[opcode].cycles;
+    }
+    else{
+        uint8_t opcodeCB = mem_read(cpu.PC++);
+        Instruction instr = CBInstructionTable[opcodeCB];
+        // printf("Opcode = 0xCB%02X, args = %d\n", opcode, instr.args);
+        instr.execute(&cpu, instr.args);
+        cpu.cycles += InstructionTable[opcodeCB].cycles;
+    }
+    if(cpu.setImeNext){
+        cpu.IME = 1;
+        cpu.setImeNext = 0;
+    }
 }
