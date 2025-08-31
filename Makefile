@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS = -Iinclude -Wall -Wextra -g
 
-SRC = src/main.c src/cpu.c src/memory.c src/instructions.c src/cpu_instructions.c
-OBJ = src/main.o src/cpu.o src/memory.o src/instructions.o src/cpu_instructions.o
+SRC = src/main.c src/cpu.c src/memory.c src/instructions.c
+OBJ = src/main.o src/cpu.o src/memory.o src/instructions.o
 TARGET = emulator
 
 all: $(TARGET)
